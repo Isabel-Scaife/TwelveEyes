@@ -99,4 +99,53 @@ public abstract class Entity : MonoBehaviour
         float angle = Mathf.Atan2(velocity.y, velocity.x) * Mathf.Rad2Deg;
         pivotParent.rotation = Quaternion.Euler(0, 0, angle);
     }
+
+    /// <summary>
+    /// Updates cooldowns and manages deactivated weapons
+    /// </summary>
+    protected virtual void Timer()
+    {
+        // ================ ranged timers ======================
+        if (rangedCooldown > 0)
+        {
+            rangedCooldown -= Time.deltaTime;
+        }
+
+        // deactive weapon
+        if (rangedColliders[0].enabled &&
+                 rangedCooldown <= rangedMaxCooldown - rangedActiveTimer)
+        {
+            // turn off all colliders and sprites 
+            for (int i = 0; i < rangedColliders.Length; i++)
+            {
+                rangedColliders[i].enabled = false;
+                rangedSprites[i].enabled = false;
+                canAttack = true;
+            }
+        }
+
+        // ================== melee timers ====================== 
+        if (meleeCooldown > 0)
+        {
+            meleeCooldown -= Time.deltaTime;
+
+            // attadck faces forward
+            Transform partentTrasform = meleeColliders[0].transform.parent;
+            RotateAttack(partentTrasform);
+        }
+
+        // deactive weapon
+        if (meleeColliders[0].enabled &&
+                 meleeCooldown <= meleeMaxCooldown - meleeActiveTimer)
+        {
+            // turn off all colliders and sprites 
+            for (int i = 0; i < meleeColliders.Length; i++)
+            {
+                meleeColliders[i].enabled = false;
+                meleeSprites[i].enabled = false;
+                canAttack = true;
+            }
+        }
+
+    }
 }

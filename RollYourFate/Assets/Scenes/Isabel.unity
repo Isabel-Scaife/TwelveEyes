@@ -1045,13 +1045,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   meleeMaxCooldown: 3
   meleeCooldown: 0
-  meleeActiveTimer: 0
+  meleeActiveTimer: 1
   meleeSprites:
   - {fileID: 423440157}
   meleeColliders:
   - {fileID: 423440154}
   rangedMaxCooldown: 3
-  rangedActiveTimer: 0
+  rangedActiveTimer: 1
   rangedSprites:
   - {fileID: 1117840858}
   rangedColliders:

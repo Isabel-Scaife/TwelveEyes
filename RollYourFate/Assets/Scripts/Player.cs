@@ -40,48 +40,11 @@ public class Player : Entity
     /// <summary>
     /// Updates timers and checks select timer code every frame
     /// </summary>
-    private void Timer()
+    protected override void Timer()
     {
         currentTimer += Time.deltaTime;
 
-        // ================ ranged timers ======================
-        if(rangedCooldown > 0 )
-        {
-            rangedCooldown -= Time.deltaTime;
-        }
-
-        // deactive weapon
-        if (rangedColliders[0].enabled &&
-                 rangedCooldown <= rangedMaxCooldown - rangedActiveTimer)
-        {
-            // turn off all colliders and sprites 
-            for (int i = 0; i < rangedColliders.Length; i++)
-            {
-                rangedColliders[i].enabled = false;
-                rangedSprites[i].enabled = false;
-                canAttack = true;
-            }
-        }
-
-        // ================== melee timers ====================== 
-        if (meleeCooldown > 0)
-        {
-            meleeCooldown -= Time.deltaTime;
-        }
-
-        // deactive weapon
-        if (meleeColliders[0].enabled &&
-                 meleeCooldown <= meleeMaxCooldown - meleeActiveTimer)
-        {
-            // turn off all colliders and sprites 
-            for (int i = 0; i < meleeColliders.Length; i++)
-            {
-                meleeColliders[i].enabled = false;
-                meleeSprites[i].enabled = false;
-                canAttack = true;
-            }
-        }
-
+        base.Timer();
     }
 
     /// <summary>
