@@ -69,4 +69,21 @@ public abstract class Entity : MonoBehaviour
     /// Runs logic for what different attack is used 
     /// </summary>
     protected abstract void Attack();
+
+    /// <summary>
+    /// Helper method that determines whether something is in range
+    /// of the entity or not. "In range" refers to a radius around the entity
+    /// </summary>
+    /// <param name="entity">The entity</param>
+    /// <param name="otherObject">The other object to test in range of the entity</param>
+    /// <param name="radius">The radius that determines "in range"</param>
+    /// <returns></returns>
+    protected bool InRange(Entity entity, GameObject otherObject, float radius)
+    {
+        if (Vector3.Distance(entity.transform.position, otherObject.transform.position) <= radius)
+        {
+            return true;
+        }
+        return false;
+    }
 }
