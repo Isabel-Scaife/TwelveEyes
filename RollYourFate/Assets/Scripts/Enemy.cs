@@ -67,15 +67,15 @@ public class Enemy : Entity
         
     }
 
-    protected override void LongAttack()
+    protected override void RangedAttack()
     {
-        if (longCoolDown >= longAttackSpeed)
+        if (rangedCooldown >= rangedMaxCooldown)
         {
             // attack success 
         }
     }
 
-    protected override void ShortAttack()
+    protected override void MeleeAttack()
     {
         throw new System.NotImplementedException();
     }

@@ -15,11 +15,8 @@ public class Player : Entity
     float switchTime;
     float currentTimer;
 
-    [SerializeField]
     ControlScheme movementControl = ControlScheme.WASD;
-    [SerializeField]
     ControlScheme attackControl = ControlScheme.JIKL;
-    [SerializeField]
     ControlScheme[] openControls = { ControlScheme.Arrows, ControlScheme.JIKL };
 
     private void FixedUpdate()
@@ -42,14 +39,40 @@ public class Player : Entity
     {
         currentTimer += Time.deltaTime;
 
-        if(longCoolDown != 0 )
+        // ================ ranged timers ======================
+        if(rangedCooldown > 0 )
         {
-            longCoolDown = Time.deltaTime;
+            rangedCooldown -= Time.deltaTime;
         }
 
-        if (shortAttackSpeed != 0)
+        // deactive weapon
+        if (rangedColliders[0].enabled &&
+                 rangedCooldown <= rangedMaxCooldown - rangedActiveTimer)
         {
-            shortCoolDown = Time.deltaTime;
+            // turn off all colliders and sprites 
+            for (int i = 0; i < rangedColliders.Length; i++)
+            {
+                rangedColliders[i].enabled = false;
+                rangedSprites[i].enabled = false;
+            }
+        }
+
+        // ================== melee timers ====================== 
+        if (meleeCooldown > 0)
+        {
+            meleeCooldown -= Time.deltaTime;
+        }
+
+        // deactive weapon
+        if (meleeColliders[0].enabled &&
+                 meleeCooldown <= meleeMaxCooldown - meleeActiveTimer)
+        {
+            // turn off all colliders and sprites 
+            for (int i = 0; i < meleeColliders.Length; i++)
+            {
+                meleeColliders[i].enabled = false;
+                meleeSprites[i].enabled = false;
+            }
         }
 
     }
@@ -70,7 +93,7 @@ public class Player : Entity
             rng = Random.Range(0, 2);
             attackControl = openControls[rng];
 
-            // 4. reset timer
+            // 5. reset timer
             currentTimer = 0;
         }
     }
@@ -117,43 +140,53 @@ public class Player : Entity
     {
         if (attackControl == ControlScheme.WASD)
         {
-            if (Input.GetKey(KeyCode.A)) LongAttack();
-            else if (Input.GetKey(KeyCode.D)) ShortAttack();
+            if (Input.GetKey(KeyCode.A)) RangedAttack();
+            else if (Input.GetKey(KeyCode.D)) MeleeAttack();
         }
         else if (attackControl == ControlScheme.JIKL)
         {
-            if (Input.GetKey(KeyCode.J)) LongAttack();
-            else if (Input.GetKey(KeyCode.L)) ShortAttack();
+            if (Input.GetKey(KeyCode.J)) RangedAttack();
+            else if (Input.GetKey(KeyCode.L)) MeleeAttack();
         }
         else if (attackControl == ControlScheme.JIKL)
         {
-            if (Input.GetKey(KeyCode.LeftArrow)) LongAttack();
-            else if (Input.GetKey(KeyCode.RightArrow)) ShortAttack();
+            if (Input.GetKey(KeyCode.LeftArrow)) RangedAttack();
+            else if (Input.GetKey(KeyCode.RightArrow)) MeleeAttack();
         }
     }
-    protected override void LongAttack()
+    protected override void RangedAttack()
     {
-        if(longCoolDown >= longAttackSpeed)
+        // 1. able to attack
+        if (rangedCooldown <= 0)
         {
-            // attack success 
-            // turn on collider 
-            // turn on sprite render 
+            // turn on all colliders and sprites 
+            for (int i = 0; i < rangedColliders.Length; i++)
+            {
+                rangedColliders[i].enabled = true;
+                rangedSprites[i].enabled = true;
+            }
 
             // reset cool down
+            rangedCooldown = rangedMaxCooldown; 
         }
     }
 
-    protected override void ShortAttack()
+    protected override void MeleeAttack()
     {
-        if (shortCoolDown >= shortAttackSpeed)
+        // 1. able to attack
+        if (meleeCooldown <= 0)
         {
-            // attack success 
-            // turn on collider 
-            // turn on sprite render 
+            // turn on all colliders and sprites 
+            for (int i = 0; i < meleeColliders.Length; i++)
+            {
+                meleeColliders[i].enabled = true;
+                meleeSprites[i].enabled = true;
+            }
 
             // reset cool down
-            shortCoolDown = 0;
+            meleeCooldown = meleeMaxCooldown;
         }
+        
     }
 
     

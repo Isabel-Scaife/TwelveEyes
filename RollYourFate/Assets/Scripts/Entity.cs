@@ -3,16 +3,31 @@ using UnityEngine;
 public abstract class Entity : MonoBehaviour
 {
     [SerializeField]
-    protected float shortDamage;
+    protected float meleeDamage;
     [SerializeField]
-    protected float shortAttackSpeed;
-    protected float shortCoolDown;
+    protected float meleeMaxCooldown;
+    [SerializeField]
+    protected float meleeCooldown;
+    [SerializeField]
+    protected float meleeActiveTimer;
 
     [SerializeField]
-    protected float longDamage;
+    protected SpriteRenderer[] meleeSprites;
     [SerializeField]
-    protected float longAttackSpeed;
-    protected float longCoolDown;
+    protected Collider2D[] meleeColliders;
+
+    [SerializeField]
+    protected float rangedDamage;
+    [SerializeField]
+    protected float rangedMaxCooldown;
+    protected float rangedCooldown;
+    [SerializeField]
+    protected float rangedActiveTimer;
+
+    [SerializeField]
+    protected SpriteRenderer[] rangedSprites;
+    [SerializeField]
+    protected Collider2D[] rangedColliders;
 
     [SerializeField]
     protected float maxHealth;
@@ -38,11 +53,11 @@ public abstract class Entity : MonoBehaviour
     /// <summary>
     /// Check cooldown and runs attack
     /// </summary>
-    protected abstract void LongAttack();
+    protected abstract void RangedAttack();
     /// <summary>
     /// Check cooldown and runs attack
     /// </summary>
-    protected abstract void ShortAttack();
+    protected abstract void MeleeAttack();
     /// <summary>
     /// Run movement logic
     /// </summary>
