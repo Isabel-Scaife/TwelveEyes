@@ -109,6 +109,23 @@ public class Enemy : Entity
     }
 
     /// <summary>
+    /// Enemy takes amount of damage,
+    /// when health reaches 0 destory enemy
+    /// </summary>
+    /// <param name="damage"></param>
+    public override void TakeDamage(float damage)
+    {
+        currentHealth -= damage;
+
+        Debug.Log(currentHealth);
+
+        if (currentHealth <= 0)
+        {
+            Destroy(this.gameObject);
+        }
+    }    
+
+    /// <summary>
     /// Enemies attack when in range of the player, and choose
     /// which attack based on how far the player is
     /// </summary>

@@ -71,6 +71,11 @@ public abstract class Entity : MonoBehaviour
     protected abstract void Attack();
 
     /// <summary>
+    /// Deals damage to enity, kills enemy if 0 
+    /// </summary>
+    public abstract void TakeDamage(float damage);
+
+    /// <summary>
     /// Helper method that determines whether something is in range
     /// of the entity or not. "In range" refers to a radius around the entity
     /// </summary>

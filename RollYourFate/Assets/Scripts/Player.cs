@@ -141,8 +141,25 @@ public class Player : Entity
 
         velocity.Normalize();
         position += velocity * speed * Time.deltaTime;
-        rb.transform.position = position;
+        rb.MovePosition(position);
     }
+
+    /// <summary>
+    /// Player takes amount of damage, 
+    /// if their health reaches lose game
+    /// </summary>
+    /// <param name="damage">damage taken</param>
+    public override void TakeDamage(float damage)
+    {
+        currentHealth -= damage;
+
+        if (currentHealth < 0)
+        {
+            // lose game
+        }
+
+    }
+
     /// <summary>
     /// Run corresponding attack to correct button press 
     /// </summary>
@@ -176,19 +193,22 @@ public class Player : Entity
         // 1. able to attack
         if (rangedCooldown <= 0)
         {
-            // rotate based on direction 
+            // 2. rotate based on direction 
             float angle = Mathf.Atan2(velocity.y, velocity.x) * Mathf.Rad2Deg;
-            Transform partentTrasfomr = rangedColliders[0].transform.parent;
-            partentTrasfomr.rotation = Quaternion.Euler(0, 0, angle);
+            Transform partentTrasform = rangedColliders[0].transform.parent;
+            partentTrasform.rotation = Quaternion.Euler(0, 0, angle);
 
-            // turn on all colliders and sprites 
+            // 3. position based on players current position
+            partentTrasform.position = this.position;
+
+            // 3. turn on all colliders and sprites 
             for (int i = 0; i < rangedColliders.Length; i++)
             {
                 rangedColliders[i].enabled = true;
                 rangedSprites[i].enabled = true;
             }
 
-            // reset cool down
+            // 4. reset cool down
             rangedCooldown = rangedMaxCooldown;
             canAttack = false;
         }
@@ -213,8 +233,7 @@ public class Player : Entity
             meleeCooldown = meleeMaxCooldown;
             canAttack = false;
         }
-        
+
     }
 
-    
 }
