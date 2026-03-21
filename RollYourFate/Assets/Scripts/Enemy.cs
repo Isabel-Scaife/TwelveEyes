@@ -40,7 +40,7 @@ public class Enemy : Entity
     private float currentTimer;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    protected override void Start()
     {
         // sets default radii if none set in inspector
         if (radius <= 0)
@@ -52,6 +52,8 @@ public class Enemy : Entity
         {
             playerRadius = 10;
         }
+
+        base.Start();
 
     }
 

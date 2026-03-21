@@ -42,7 +42,7 @@ public abstract class Entity : MonoBehaviour
     //protected Collider2D collider;
 
 
-    private void Start()
+    protected virtual void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         currentHealth = maxHealth;

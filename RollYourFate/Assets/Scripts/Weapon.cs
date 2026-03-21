@@ -21,6 +21,10 @@ public class Weapon : MonoBehaviour
     [SerializeField]
     private float damage;
 
+    [SerializeField]
+    private float hitDelay;
+    private float currentDelay = 0;
+
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -29,6 +33,28 @@ public class Weapon : MonoBehaviour
         if(entityHit != null )
         {
             entityHit.TakeDamage(damage);
+            currentDelay = 0;
+        }
+    }
+
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        // ranged attack stays on ground 
+        if (rangeType == RangeType.longAttack)
+        {
+            currentDelay += Time.deltaTime;
+
+            // take damage after delay over 
+            if (currentDelay > hitDelay)
+            {
+                Entity entityHit = collision.GetComponent<Entity>();
+
+                if (entityHit != null)
+                {
+                    entityHit.TakeDamage(damage);
+                    currentDelay = 0;
+                }
+            }
         }
     }
 }
