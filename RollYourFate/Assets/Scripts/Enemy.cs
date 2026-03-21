@@ -2,6 +2,12 @@ using Unity.VisualScripting;
 using UnityEngine;
 using System.Collections.Generic;
 
+// Morgan Meys
+/// <summary>
+/// Enemy follows the player, but will avoid walls.
+/// They will use short attack if in range of player,
+/// and long attack when out of range.
+/// </summary>
 public class Enemy : Entity
 {
     // Fields
@@ -9,6 +15,10 @@ public class Enemy : Entity
     [SerializeField] public float maxForce;
     private Vector3 velocity;
     private Vector3 acceleration;
+
+    // Attack radii
+    [SerializeField] public float longRadius;
+    [SerializeField] public float shortRadius;
 
     // reference to player
     [SerializeField] public Player player;
@@ -50,6 +60,11 @@ public class Enemy : Entity
     protected override void Move()
     {
 
+    }
+
+    protected override void Attack()
+    {
+        
     }
 
     protected override void LongAttack()
