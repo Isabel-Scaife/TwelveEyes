@@ -160,6 +160,8 @@ public class Enemy : Entity
             Transform partentTrasform = rangedColliders[0].transform.parent;
             RotateAttack(partentTrasform);
 
+            //partentTrasform.position = this.position;
+
             // "enables" colliders
             for (int i = 0; i < rangedColliders.Length; i++)
             {
