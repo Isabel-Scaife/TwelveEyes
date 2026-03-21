@@ -33,8 +33,8 @@ public abstract class Entity : MonoBehaviour
 
     [SerializeField]
     protected float speed;
-    protected Vector2 position;
-    protected Vector2 velocity;
+    protected Vector3 position;
+    protected Vector3 velocity;
 
 
     protected Rigidbody2D rb;
@@ -86,5 +86,17 @@ public abstract class Entity : MonoBehaviour
             return true;
         }
         return false;
+    }
+
+    /// <summary>
+    /// Rotates the entity's attacks around pivot point 
+    /// in direction entity is facing
+    /// </summary>
+    /// <param name="pivotParent">Attacks pivot point</param>
+    protected void RotateAttack(Transform pivotParent)
+    {
+        // rotate based on movement direction 
+        float angle = Mathf.Atan2(velocity.y, velocity.x) * Mathf.Rad2Deg;
+        pivotParent.rotation = Quaternion.Euler(0, 0, angle);
     }
 }

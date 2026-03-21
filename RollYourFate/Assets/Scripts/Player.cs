@@ -193,12 +193,10 @@ public class Player : Entity
         // 1. able to attack
         if (rangedCooldown <= 0)
         {
-            // 2. rotate based on direction 
-            float angle = Mathf.Atan2(velocity.y, velocity.x) * Mathf.Rad2Deg;
+            // 2. rotate to facing direction and set position 
             Transform partentTrasform = rangedColliders[0].transform.parent;
-            partentTrasform.rotation = Quaternion.Euler(0, 0, angle);
+            RotateAttack(partentTrasform);
 
-            // 3. position based on players current position
             partentTrasform.position = this.position;
 
             // 3. turn on all colliders and sprites 
@@ -222,6 +220,10 @@ public class Player : Entity
         // 1. able to attack
         if (meleeCooldown <= 0)
         {
+            // 2. rotate to facing direction 
+            Transform partentTrasform = meleeColliders[0].transform.parent;
+            RotateAttack(partentTrasform);
+
             // turn on all colliders and sprites 
             for (int i = 0; i < meleeColliders.Length; i++)
             {

@@ -119,6 +119,38 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &44046735
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 44046736}
+  m_Layer: 0
+  m_Name: PlayerMelee
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &44046736
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 44046735}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1493436328}
+  m_Father: {fileID: 1425476818}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &423440153
 GameObject:
   m_ObjectHideFlags: 0
@@ -132,7 +164,7 @@ GameObject:
   - component: {fileID: 423440154}
   - component: {fileID: 423440155}
   m_Layer: 7
-  m_Name: melee
+  m_Name: HitBox
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -198,6 +230,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rangeType: 0
   damage: 10
+  hitDelay: 0
 --- !u!4 &423440156
 Transform:
   m_ObjectHideFlags: 0
@@ -206,12 +239,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 423440153}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.7, y: 0.39, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.85, y: 0.17, z: 0}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_ConstrainProportionsScale: 1
   m_Children: []
-  m_Father: {fileID: 1469282536}
+  m_Father: {fileID: 1492406704}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &423440157
 SpriteRenderer:
@@ -281,7 +314,7 @@ GameObject:
   - component: {fileID: 468447663}
   - component: {fileID: 468447666}
   m_Layer: 6
-  m_Name: Ranged
+  m_Name: Hitbox
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -406,7 +439,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rangeType: 1
-  damage: 10
+  damage: 0.1
+  hitDelay: 0.08
 --- !u!1 &1095550347
 GameObject:
   m_ObjectHideFlags: 0
@@ -418,6 +452,7 @@ GameObject:
   - component: {fileID: 1095550350}
   - component: {fileID: 1095550349}
   - component: {fileID: 1095550348}
+  - component: {fileID: 1095550351}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -499,6 +534,50 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1095550351
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1095550347}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a79441f348de89743a2939f4d699eac1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_RenderShadows: 1
+  m_RequiresDepthTextureOption: 2
+  m_RequiresOpaqueTextureOption: 2
+  m_CameraType: 0
+  m_Cameras: []
+  m_RendererIndex: -1
+  m_VolumeLayerMask:
+    serializedVersion: 2
+    m_Bits: 1
+  m_VolumeTrigger: {fileID: 0}
+  m_VolumeFrameworkUpdateModeOption: 2
+  m_RenderPostProcessing: 0
+  m_Antialiasing: 0
+  m_AntialiasingQuality: 2
+  m_StopNaN: 0
+  m_Dithering: 0
+  m_ClearDepth: 1
+  m_AllowXRRendering: 1
+  m_AllowHDROutput: 1
+  m_UseScreenCoordOverride: 0
+  m_ScreenSizeOverride: {x: 0, y: 0, z: 0, w: 0}
+  m_ScreenCoordScaleBias: {x: 0, y: 0, z: 0, w: 0}
+  m_RequiresDepthTexture: 0
+  m_RequiresColorTexture: 0
+  m_Version: 2
+  m_TaaSettings:
+    m_Quality: 3
+    m_FrameInfluence: 0.1
+    m_JitterScale: 1
+    m_MipBias: 0
+    m_VarianceClampScale: 0.9
+    m_ContrastAdaptiveSharpening: 0
 --- !u!1 &1117840854
 GameObject:
   m_ObjectHideFlags: 0
@@ -512,7 +591,7 @@ GameObject:
   - component: {fileID: 1117840855}
   - component: {fileID: 1117840856}
   m_Layer: 7
-  m_Name: range
+  m_Name: HitBox
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -568,6 +647,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rangeType: 1
   damage: 10
+  hitDelay: 0
 --- !u!4 &1117840857
 Transform:
   m_ObjectHideFlags: 0
@@ -576,12 +656,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1117840854}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.67, y: 0.39, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 4.85, y: 0, z: 0}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_ConstrainProportionsScale: 1
   m_Children: []
-  m_Father: {fileID: 1469282536}
+  m_Father: {fileID: 1349295199}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &1117840858
 SpriteRenderer:
@@ -638,6 +718,38 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &1349295198
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1349295199}
+  m_Layer: 0
+  m_Name: EnemyRanged
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1349295199
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1349295198}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.02, y: 3.03, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1117840857}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1425476813
 GameObject:
   m_ObjectHideFlags: 0
@@ -670,7 +782,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ccd2a2a0914ad1e488f2dcb6ce18bd2c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  meleeDamage: 0
   meleeMaxCooldown: 3
   meleeCooldown: 0
   meleeActiveTimer: 1
@@ -678,7 +789,6 @@ MonoBehaviour:
   - {fileID: 1493436329}
   meleeColliders:
   - {fileID: 1493436327}
-  rangedDamage: 0
   rangedMaxCooldown: 4
   rangedActiveTimer: 1
   rangedSprites:
@@ -821,8 +931,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1746668413}
-  - {fileID: 1493436328}
+  - {fileID: 44046736}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1469282531
@@ -934,7 +1043,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3c099740964e1f4c9647c4a7cd8188f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  meleeDamage: 2
   meleeMaxCooldown: 3
   meleeCooldown: 0
   meleeActiveTimer: 0
@@ -942,7 +1050,6 @@ MonoBehaviour:
   - {fileID: 423440157}
   meleeColliders:
   - {fileID: 423440154}
-  rangedDamage: 3
   rangedMaxCooldown: 3
   rangedActiveTimer: 0
   rangedSprites:
@@ -950,8 +1057,8 @@ MonoBehaviour:
   rangedColliders:
   - {fileID: 1117840855}
   maxHealth: 20
-  speed: 2
-  maxSpeed: 3
+  speed: 1
+  maxSpeed: 1.5
   maxForce: 5
   player: {fileID: 1425476814}
   walls: []
@@ -1023,13 +1130,44 @@ Transform:
   m_GameObject: {fileID: 1469282531}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.33, y: 2.69, z: 0}
+  m_LocalPosition: {x: 0.02, y: 3.03, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 1492406704}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1492406703
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1492406704}
+  m_Layer: 0
+  m_Name: EnemyMelee
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1492406704
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1492406703}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 423440156}
-  - {fileID: 1117840857}
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 1469282536}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1493436326
 GameObject:
@@ -1044,7 +1182,7 @@ GameObject:
   - component: {fileID: 1493436327}
   - component: {fileID: 1493436330}
   m_Layer: 6
-  m_Name: Melee
+  m_Name: HitBox
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1104,12 +1242,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1493436326}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.73, y: 0.0369, z: 0}
-  m_LocalScale: {x: 1, y: 0.41512784, z: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.78, y: 0.0369, z: 0}
+  m_LocalScale: {x: 1.5576, y: 0.41512784, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 1425476818}
+  m_Father: {fileID: 44046736}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &1493436329
 SpriteRenderer:
@@ -1180,6 +1318,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rangeType: 0
   damage: 10
+  hitDelay: 0
 --- !u!1 &1746668412
 GameObject:
   m_ObjectHideFlags: 0
@@ -1190,7 +1329,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1746668413}
   m_Layer: 0
-  m_Name: pivot
+  m_Name: PlayerRanged
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1210,12 +1349,14 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 468447664}
-  m_Father: {fileID: 1425476818}
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 1095550350}
+  - {fileID: 1746668413}
   - {fileID: 1425476818}
   - {fileID: 1469282536}
+  - {fileID: 1349295199}

@@ -14,7 +14,6 @@ public class Enemy : Entity
     [SerializeField] public float maxSpeed;
     [SerializeField] public float maxForce;
 
-    private Vector3 velocity;
     private Vector3 acceleration;
     private float decelerationRate = 0.8f;
     private float minSpeed = 0.01f;
@@ -135,14 +134,14 @@ public class Enemy : Entity
     {
         // only attacks when in range of player. it will also be
         // seeking the player at this time
-        if (InRange(this, player.gameObject, playerRadius))
+        if (canAttack && InRange(this, player.gameObject, playerRadius))
         {
             if (InRange(this, player.gameObject, meleeRadius))
             {
                 MeleeAttack();
                 return;                 // only runs short attack if able to
             }
-            if (InRange(this, player.gameObject, rangeRadius))
+            else if (InRange(this, player.gameObject, rangeRadius))
             {
                 RangedAttack();
             }
@@ -155,8 +154,12 @@ public class Enemy : Entity
     protected override void RangedAttack()
     {
         // must not be on cooldown to attack
-        if (rangedCooldown <= 0 && canAttack)
+        if (rangedCooldown <= 0)
         {
+            // 2. rotate to facing direction and set position 
+            Transform partentTrasform = rangedColliders[0].transform.parent;
+            RotateAttack(partentTrasform);
+
             // "enables" colliders
             for (int i = 0; i < rangedColliders.Length; i++)
             {
@@ -177,6 +180,11 @@ public class Enemy : Entity
         // must not be on cooldown to attack
         if (meleeCooldown <= 0)
         {
+            // 2. rotate to facing direction
+            Transform partentTrasform = meleeColliders[0].transform.parent;
+            RotateAttack(partentTrasform);
+
+
             // "enables" colliders
             for (int i = 0; i < meleeColliders.Length; i++)
             {
