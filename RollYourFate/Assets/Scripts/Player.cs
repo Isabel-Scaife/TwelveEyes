@@ -1,4 +1,3 @@
-
 using UnityEngine;
 
 
@@ -30,6 +29,9 @@ public class Player : Entity
 
         // 3. move player
         Move();
+
+        // 4. attack 
+        Attack();
 
     }
 
@@ -69,6 +71,9 @@ public class Player : Entity
         }
     }
 
+    /// <summary>
+    /// Move when player press correct buttons
+    /// </summary>
     protected override void Move()
     {
         position = rb.transform.position;
@@ -101,13 +106,34 @@ public class Player : Entity
         position = velocity * speed * Time.deltaTime;
         rb.transform.position = position;
     }
-
+    /// <summary>
+    /// Run corresponding attack to correct button press 
+    /// </summary>
+    protected override void Attack()
+    {
+        if (attackControl == ControlScheme.WASD)
+        {
+            if (Input.GetKey(KeyCode.A)) LongAttack();
+            else if (Input.GetKey(KeyCode.D)) ShortAttack();
+        }
+        else if (attackControl == ControlScheme.JIKL)
+        {
+            if (Input.GetKey(KeyCode.J)) LongAttack();
+            else if (Input.GetKey(KeyCode.L)) ShortAttack();
+        }
+        else if (attackControl == ControlScheme.JIKL)
+        {
+            if (Input.GetKey(KeyCode.LeftArrow)) LongAttack();
+            else if (Input.GetKey(KeyCode.RightArrow)) ShortAttack();
+        }
+    }
     protected override void LongAttack()
     {
         if(longCoolDown >= longAttackSpeed)
         {
             // attack success 
             // turn on collider 
+            // turn on sprite render 
 
             // reset cool down
         }
@@ -118,8 +144,9 @@ public class Player : Entity
         if (shortCoolDown >= shortAttackSpeed)
         {
             // attack success 
-            // turn on collider
-            
+            // turn on collider 
+            // turn on sprite render 
+
             // reset cool down
         }
     }

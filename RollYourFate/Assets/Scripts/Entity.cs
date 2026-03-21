@@ -29,7 +29,21 @@ public abstract class Entity : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
     }
+    /// <summary>
+    /// Check cooldown and runs attack
+    /// </summary>
     protected abstract void LongAttack();
+    /// <summary>
+    /// Check cooldown and runs attack
+    /// </summary>
     protected abstract void ShortAttack();
+    /// <summary>
+    /// Run movement logic
+    /// </summary>
     protected abstract void Move();
+
+    /// <summary>
+    /// Runs logic for what different attack is used 
+    /// </summary>
+    protected abstract void Attack();
 }
