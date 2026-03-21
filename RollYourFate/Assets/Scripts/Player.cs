@@ -1,4 +1,6 @@
+
 using UnityEngine;
+
 
 enum ControlScheme
 {
@@ -14,20 +16,19 @@ public class Player : Entity
     float switchTime;
     float currentTimer;
 
-    ControlScheme movement;
-    ControlScheme attack;
+    ControlScheme movementControl = ControlScheme.WASD;
+    ControlScheme attackControl = ControlScheme.JIKL;
+    ControlScheme[] openControls = { ControlScheme.Arrows, ControlScheme.JIKL };
 
     private void FixedUpdate()
     {
-        currentTimer += Time.deltaTime;
+        // 1. Update timers
+        Timer();
 
-        // 1. check if player controls swap
-        if (currentTimer >= switchTime)
-        {
-            SwitchControl();
-        }
+        // 2. player controls swap
+        SwitchControl();
 
-        // 2. move player
+        // 3. move player
         Move();
 
     }
@@ -50,7 +51,22 @@ public class Player : Entity
 
     void SwitchControl()
     {
+        if (currentTimer >= switchTime)
+        {
+            // 1. hold the new randomized scheme
+            // 2. add old control scheme to avaible contorl slots
+            // 3. replace old scheme with new 
+            int rng = Random.Range(0, 2);
+            ControlScheme tempScheme = openControls[rng];
+            openControls[rng] = movementControl;
+            movementControl = tempScheme;
 
+            // same as above but can randomize to the same contorls 
+            rng = Random.Range(0, 2);
+            tempScheme = openControls[rng];
+            openControls[rng] = attackControl;
+            attackControl = tempScheme;
+        }
     }
 
     protected override void Move()
@@ -58,28 +74,32 @@ public class Player : Entity
         position = rb.transform.position;
         velocity = Vector2.zero;
 
-        if (movement == ControlScheme.WASD)
+        if (movementControl == ControlScheme.WASD)
         {
-            if(Input.GetKey(KeyCode.A)) position.x -= speed;
-            else if(Input.GetKey(KeyCode.D)) position.x += speed;
-            else if(Input.GetKeyUp(KeyCode.S)) position.y -= speed;
-            else if(Input.GetKeyUp(KeyCode.W)) position.y += speed;
+            if(Input.GetKey(KeyCode.A)) velocity.x -= 1;
+            if(Input.GetKey(KeyCode.D)) velocity.x += 1;
+            if(Input.GetKeyUp(KeyCode.S)) velocity.y -= 1;
+            if(Input.GetKeyUp(KeyCode.W)) velocity.y += 1;
         }
-        else if (movement == ControlScheme.JIKL)
+        else if (movementControl == ControlScheme.JIKL)
         {
-            if (Input.GetKey(KeyCode.J)) position.x -= speed;
-            else if (Input.GetKey(KeyCode.L)) position.x += speed;
-            else if (Input.GetKeyUp(KeyCode.K)) position.y -= speed;
-            else if (Input.GetKeyUp(KeyCode.I)) position.y += speed;
+            if (Input.GetKey(KeyCode.J)) velocity.x -= 1;
+            if (Input.GetKey(KeyCode.L)) velocity.x += 1;
+            if (Input.GetKeyUp(KeyCode.K)) velocity.y -= 1;
+            if (Input.GetKeyUp(KeyCode.I)) velocity.y += 1;
         }
 
-        else if (movement == ControlScheme.Arrows)
+        else if (movementControl == ControlScheme.Arrows)
         {
-            if (Input.GetKey(KeyCode.LeftArrow)) position.x -= speed;
-            else if (Input.GetKey(KeyCode.RightArrow)) position.x += speed;
-            else if (Input.GetKeyUp(KeyCode.DownArrow)) position.y -= speed;
-            else if (Input.GetKeyUp(KeyCode.UpArrow)) position.y += speed;
+            if (Input.GetKey(KeyCode.LeftArrow)) velocity.x -= 1;
+            if (Input.GetKey(KeyCode.RightArrow)) velocity.x += 1;
+            if (Input.GetKeyUp(KeyCode.DownArrow)) velocity.y -= 1;
+            if (Input.GetKeyUp(KeyCode.UpArrow)) velocity.y += 1;
         }
+
+        velocity.Normalize();
+        position = velocity * speed * Time.deltaTime;
+        rb.transform.position = position;
     }
 
     protected override void LongAttack()
@@ -87,11 +107,20 @@ public class Player : Entity
         if(longCoolDown >= longAttackSpeed)
         {
             // attack success 
+            // turn on collider 
+
+            // reset cool down
         }
     }
 
     protected override void ShortAttack()
     {
-        throw new System.NotImplementedException();
+        if (shortCoolDown >= shortAttackSpeed)
+        {
+            // attack success 
+            // turn on collider
+            
+            // reset cool down
+        }
     }
 }
