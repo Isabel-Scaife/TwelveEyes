@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.UIElements;
 
 enum ControlScheme
 {
@@ -11,11 +10,53 @@ enum ControlScheme
 public class Player : Entity
 {
 
+    [SerializeField]
+    float switchTime;
+    float currentTimer;
+
     ControlScheme movement;
     ControlScheme attack;
+
+    private void FixedUpdate()
+    {
+        currentTimer += Time.deltaTime;
+
+        // 1. check if player controls swap
+        if (currentTimer >= switchTime)
+        {
+            SwitchControl();
+        }
+
+        // 2. move player
+        Move();
+
+    }
+
+    private void Timer()
+    {
+        currentTimer += Time.deltaTime;
+
+        if(longCoolDown != 0 )
+        {
+            longCoolDown = Time.deltaTime;
+        }
+
+        if (shortAttackSpeed != 0)
+        {
+            shortCoolDown = Time.deltaTime;
+        }
+
+    }
+
+    void SwitchControl()
+    {
+
+    }
+
     protected override void Move()
     {
-        position = rb.position;
+        position = rb.transform.position;
+        velocity = Vector2.zero;
 
         if (movement == ControlScheme.WASD)
         {
@@ -39,12 +80,14 @@ public class Player : Entity
             else if (Input.GetKeyUp(KeyCode.DownArrow)) position.y -= speed;
             else if (Input.GetKeyUp(KeyCode.UpArrow)) position.y += speed;
         }
-        throw new System.NotImplementedException();
     }
 
     protected override void LongAttack()
     {
-        throw new System.NotImplementedException();
+        if(longCoolDown >= longAttackSpeed)
+        {
+            // attack success 
+        }
     }
 
     protected override void ShortAttack()

@@ -3,15 +3,24 @@ using UnityEngine;
 public abstract class Entity : MonoBehaviour
 {
     [SerializeField]
-    float shortDamage;
+    protected float shortDamage;
     [SerializeField]
-    float longDamage;
+    protected float shortAttackSpeed;
+    protected float shortCoolDown;
+
     [SerializeField]
-    float health;
+    protected float longDamage;
+    [SerializeField]
+    protected float longAttackSpeed;
+    protected float longCoolDown;
+
+    [SerializeField]
+    protected float health;
 
     [SerializeField]
     protected float speed;
     protected Vector2 position;
+    protected Vector2 velocity;
 
 
     protected Rigidbody2D rb;
