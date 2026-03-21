@@ -1,5 +1,9 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
+/// <summary>
+/// Weapons are short or long attacks
+/// </summary>
 public enum RangeType
 {
     shortAttack,
@@ -12,10 +16,7 @@ public enum RangeType
 /// </summary>
 public class Weapon : MonoBehaviour
 {
-    // Fields
-    [SerializeField] public Sprite weaponSprite;
 
-    public int damage;
     [SerializeField] public RangeType rangeType;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -28,15 +29,5 @@ public class Weapon : MonoBehaviour
     void Update()
     {
         
-    }
-
-    // Methods
-
-    /// <summary>
-    /// Uses the weapon and deals damage amount to enemy
-    /// </summary>
-    public void UseWeapon()
-    {
-
     }
 }
