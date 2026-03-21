@@ -5,8 +5,6 @@ public abstract class Entity : MonoBehaviour
     protected bool canAttack = true;
     
     [SerializeField]
-    protected float meleeDamage;
-    [SerializeField]
     protected float meleeMaxCooldown;
     [SerializeField]
     protected float meleeCooldown;
@@ -18,8 +16,6 @@ public abstract class Entity : MonoBehaviour
     [SerializeField]
     protected Collider2D[] meleeColliders;
 
-    [SerializeField]
-    protected float rangedDamage;
     [SerializeField]
     protected float rangedMaxCooldown;
     protected float rangedCooldown;

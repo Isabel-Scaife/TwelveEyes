@@ -153,7 +153,7 @@ public class Enemy : Entity
     protected override void RangedAttack()
     {
         // must not be on cooldown to attack
-        if (rangedCooldown <= 0)
+        if (rangedCooldown <= 0 && canAttack)
         {
             // "enables" colliders
             for (int i = 0; i < rangedColliders.Length; i++)
@@ -161,7 +161,9 @@ public class Enemy : Entity
                 rangedColliders[i].enabled = true;
                 rangedSprites[i].enabled = true;
             }
+
             rangedCooldown = rangedMaxCooldown;
+            canAttack = false;
         }
     }
 
@@ -179,7 +181,9 @@ public class Enemy : Entity
                 meleeColliders[i].enabled = true;
                 meleeSprites[i].enabled = true;
             }
+
             meleeCooldown = meleeMaxCooldown;
+            canAttack = false;
         }
     }
 
@@ -267,6 +271,7 @@ public class Enemy : Entity
             {
                 rangedColliders[i].enabled = false;
                 rangedSprites[i].enabled = false;
+                canAttack = true;
             }
         }
 
@@ -281,6 +286,7 @@ public class Enemy : Entity
             {
                 meleeColliders[i].enabled = false;
                 meleeSprites[i].enabled = false;
+                canAttack = true;
             }
         }
     }
