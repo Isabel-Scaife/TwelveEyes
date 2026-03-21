@@ -1,4 +1,6 @@
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro;
 
 
 enum ControlScheme
@@ -14,6 +16,15 @@ public class Player : Entity
     [SerializeField]
     float switchTime;
     float currentTimer;
+
+    [SerializeField]
+    Slider healthBar;
+    [SerializeField]
+    TMP_Text switchText;
+    [SerializeField]
+    Slider cooldownRanged;
+    [SerializeField]
+    Slider cooldownMelee;
 
     [SerializeField]
     ControlScheme movementControl = ControlScheme.WASD;
@@ -35,6 +46,11 @@ public class Player : Entity
         // 4. attack 
         Attack();
 
+        healthBar.maxValue = maxHealth;
+        cooldownMelee.maxValue = meleeMaxCooldown;
+        cooldownRanged.maxValue = rangedMaxCooldown;
+        cooldownMelee.value = meleeCooldown;
+        cooldownRanged.value = rangedCooldown;
     }
 
     /// <summary>
@@ -43,6 +59,7 @@ public class Player : Entity
     protected override void Timer()
     {
         currentTimer += Time.deltaTime;
+        switchText.text = $"Controls switch in: {(switchTime - currentTimer).ToString("f2")} \nCurrent movement: {movementControl.ToString()} \nCurrent attacks: {attackControl.ToString()}";
 
         base.Timer();
     }
@@ -79,6 +96,7 @@ public class Player : Entity
         position = rb.transform.position;
         velocity = Vector2.zero;
 
+
         if (movementControl == ControlScheme.WASD)
         {
             if(Input.GetKey(KeyCode.A)) velocity.x -= 1;
@@ -114,7 +132,9 @@ public class Player : Entity
     /// <param name="damage">damage taken</param>
     public override void TakeDamage(float damage)
     {
+        
         currentHealth -= damage;
+        healthBar.value = currentHealth;
 
         if (currentHealth < 0)
         {
@@ -128,23 +148,32 @@ public class Player : Entity
     /// </summary>
     protected override void Attack()
     {
+        
         if (canAttack)
         {
+            cooldownRanged.gameObject.SetActive(false);
+            cooldownMelee.gameObject.SetActive(false);
             if (attackControl == ControlScheme.WASD)
             {
-                if (Input.GetKey(KeyCode.A)) RangedAttack();
-                else if (Input.GetKey(KeyCode.D)) MeleeAttack();
+                if (Input.GetKey(KeyCode.A)) { RangedAttack(); cooldownRanged.gameObject.SetActive(true); }
+                else if (Input.GetKey(KeyCode.D)) { MeleeAttack(); cooldownMelee.gameObject.SetActive(true); }
+
+
             }
             else if (attackControl == ControlScheme.JIKL)
             {
-                if (Input.GetKey(KeyCode.J)) RangedAttack();
-                else if (Input.GetKey(KeyCode.L)) MeleeAttack();
+                if (Input.GetKey(KeyCode.J)) { RangedAttack(); cooldownRanged.gameObject.SetActive(true); }
+                else if (Input.GetKey(KeyCode.L)) { MeleeAttack(); cooldownMelee.gameObject.SetActive(true); }
+
             }
-            else if (attackControl == ControlScheme.JIKL)
+            else if (attackControl == ControlScheme.Arrows)
             {
-                if (Input.GetKey(KeyCode.LeftArrow)) RangedAttack();
-                else if (Input.GetKey(KeyCode.RightArrow)) MeleeAttack();
+                if (Input.GetKey(KeyCode.LeftArrow)) { RangedAttack(); cooldownRanged.gameObject.SetActive(true); }
+                else if (Input.GetKey(KeyCode.RightArrow)) { MeleeAttack(); cooldownMelee.gameObject.SetActive(true); }
+
             }
+            
+
         }
     }
 
