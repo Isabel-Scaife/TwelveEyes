@@ -38,6 +38,12 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: Ground
+    uniqueID: 218903085
+    locked: 0
+  - name: Collider
+    uniqueID: 1133455043
+    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0
