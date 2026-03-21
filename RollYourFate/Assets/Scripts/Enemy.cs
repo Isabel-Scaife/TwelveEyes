@@ -13,12 +13,11 @@ public class Enemy : Entity
     // Fields
     [SerializeField] public float maxSpeed;
     [SerializeField] public float maxForce;
+
     private Vector3 velocity;
     private Vector3 acceleration;
-
-    // Attack radii
-    [SerializeField] public float longRadius;
-    [SerializeField] public float shortRadius;
+    private float decelerationRate = 0.8f;
+    private float minSpeed = 0.01f;
 
     // reference to player
     [SerializeField] public Player player;
@@ -29,8 +28,13 @@ public class Enemy : Entity
     // radius around enemy that it detects walls
     [SerializeField] public float radius;
 
-    // Radius (range) of when to seek player
+    // Radius (range) of when to seek + attack player
     [SerializeField] public float playerRadius;
+
+    // Short attack vs long attack radii; Should both be <
+    // player radius, and short attack should be < long attack
+    [SerializeField] public float meleeRadius;
+    [SerializeField] public float rangeRadius;
 
     // Timer fields
     private float currentTimer;
@@ -58,6 +62,8 @@ public class Enemy : Entity
         Timer();
 
         Move();
+
+        Attack();
         
     
     }
@@ -72,17 +78,27 @@ public class Enemy : Entity
         acceleration = Vector3.zero;
         Vector3 ultimateForce = Vector3.zero;
 
-        // Enemies only seek player when in range
+        // Enemies only seek player and flee walls when in range of the player
         if (InRange(this, player.gameObject, playerRadius))
         {
             ultimateForce += Seek(player) * 0.6f;
-        }
 
-        // Enemies only flee walls that are in range
-        List<GameObject> wallsInRange = DetectWalls(walls, radius);
-        for (int i = 0; i < wallsInRange.Count; i++)
+            // Enemies only flee walls that are in range
+            List<GameObject> wallsInRange = DetectWalls(walls, radius);
+            for (int i = 0; i < wallsInRange.Count; i++)
+            {
+                ultimateForce += Flee(wallsInRange[i]) * 0.7f;
+            }
+        }
+        // deceleration
+        else if (velocity.magnitude != 0f)
         {
-            ultimateForce += Flee(wallsInRange[i]) * 0.7f;
+            velocity *= 1f - (decelerationRate * Time.deltaTime);
+
+            if (velocity.magnitude < minSpeed)
+            {
+                velocity = Vector3.zero;
+            }
         }
 
         acceleration += Vector3.ClampMagnitude(ultimateForce, maxForce);
@@ -98,20 +114,56 @@ public class Enemy : Entity
     /// </summary>
     protected override void Attack()
     {
-        
-    }
-
-    protected override void RangedAttack()
-    {
-        if (rangedCooldown >= rangedMaxCooldown)
+        // only attacks when in range of player. it will also be
+        // seeking the player at this time
+        if (InRange(this, player.gameObject, playerRadius))
         {
-            // attack success 
+            if (InRange(this, player.gameObject, meleeRadius))
+            {
+                MeleeAttack();
+                return;                 // only runs short attack if able to
+            }
+            if (InRange(this, player.gameObject, rangeRadius))
+            {
+                RangedAttack();
+            }
         }
     }
 
+    /// <summary>
+    /// Activates a ranged attack if not on cooldown
+    /// </summary>
+    protected override void RangedAttack()
+    {
+        // must not be on cooldown to attack
+        if (rangedCooldown <= 0)
+        {
+            // "enables" colliders
+            for (int i = 0; i < rangedColliders.Length; i++)
+            {
+                rangedColliders[i].enabled = true;
+                rangedSprites[i].enabled = true;
+            }
+            rangedCooldown = rangedMaxCooldown;
+        }
+    }
+
+    /// <summary>
+    /// Activates a melee attack if not on cooldown
+    /// </summary>
     protected override void MeleeAttack()
     {
-        throw new System.NotImplementedException();
+        // must not be on cooldown to attack
+        if (meleeCooldown <= 0)
+        {
+            // "enables" colliders
+            for (int i = 0; i < meleeColliders.Length; i++)
+            {
+                meleeColliders[i].enabled = true;
+                meleeSprites[i].enabled = true;
+            }
+            meleeCooldown = meleeMaxCooldown;
+        }
     }
 
     // Moving helper methods
@@ -211,7 +263,7 @@ public class Enemy : Entity
             for (int i = 0; i < meleeColliders.Length; i++)
             {
                 meleeColliders[i].enabled = false;
-                meleeColliders[i].enabled = false;
+                meleeSprites[i].enabled = false;
             }
         }
     }
