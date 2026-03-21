@@ -32,6 +32,14 @@ public class Player : Entity
     ControlScheme attackControl = ControlScheme.JIKL;
     ControlScheme[] openControls = { ControlScheme.Arrows, ControlScheme.JIKL };
 
+    protected override void Start()
+    {
+        cooldownRanged.gameObject.SetActive(false);
+        cooldownMelee.gameObject.SetActive(false);
+
+        base.Start();
+    }
+
     private void FixedUpdate()
     {
         // 1. Update timers
@@ -51,6 +59,15 @@ public class Player : Entity
         cooldownRanged.maxValue = rangedMaxCooldown;
         cooldownMelee.value = meleeCooldown;
         cooldownRanged.value = rangedCooldown;
+        if (rangedCooldown <= 0)
+        {
+            cooldownRanged.gameObject.SetActive(false);
+        }
+        if(meleeCooldown <= 0)
+        {
+            cooldownMelee.gameObject.SetActive(false);
+        }
+
     }
 
     /// <summary>
@@ -63,6 +80,8 @@ public class Player : Entity
 
         base.Timer();
     }
+
+    
 
     /// <summary>
     /// Switches controls to different at certain intervals
@@ -151,8 +170,8 @@ public class Player : Entity
         
         if (canAttack)
         {
-            cooldownRanged.gameObject.SetActive(false);
-            cooldownMelee.gameObject.SetActive(false);
+            
+            
             if (attackControl == ControlScheme.WASD)
             {
                 if (Input.GetKey(KeyCode.A)) { RangedAttack(); cooldownRanged.gameObject.SetActive(true); }
@@ -185,6 +204,8 @@ public class Player : Entity
         // 1. able to attack
         if (rangedCooldown <= 0)
         {
+            
+            
             // 2. rotate to facing direction and set position 
             Transform partentTrasform = rangedColliders[0].transform.parent;
             RotateAttack(partentTrasform);
@@ -212,6 +233,7 @@ public class Player : Entity
         // 1. able to attack
         if (meleeCooldown <= 0)
         {
+            
             // 2. rotate to facing direction 
             Transform partentTrasform = meleeColliders[0].transform.parent;
             RotateAttack(partentTrasform);
