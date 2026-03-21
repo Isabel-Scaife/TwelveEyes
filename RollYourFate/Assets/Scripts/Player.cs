@@ -35,6 +35,9 @@ public class Player : Entity
 
     }
 
+    /// <summary>
+    /// Updates timers and checks select timer code every frame
+    /// </summary>
     private void Timer()
     {
         currentTimer += Time.deltaTime;
@@ -77,6 +80,9 @@ public class Player : Entity
 
     }
 
+    /// <summary>
+    /// Switches controls to different at certain intervals
+    /// </summary>
     void SwitchControl()
     {
         if (currentTimer >= switchTime)
@@ -154,6 +160,10 @@ public class Player : Entity
             else if (Input.GetKey(KeyCode.RightArrow)) MeleeAttack();
         }
     }
+
+    /// <summary>
+    /// Activate ranged attack if not on cooldown
+    /// </summary>
     protected override void RangedAttack()
     {
         // 1. able to attack
@@ -171,6 +181,9 @@ public class Player : Entity
         }
     }
 
+    /// <summary>
+    /// Activate melee attack if not on cooldown
+    /// </summary>
     protected override void MeleeAttack()
     {
         // 1. able to attack
