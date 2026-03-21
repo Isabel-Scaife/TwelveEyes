@@ -2,6 +2,8 @@ using UnityEngine;
 
 public abstract class Entity : MonoBehaviour
 {
+    protected bool canAttack = true;
+    
     [SerializeField]
     protected float meleeDamage;
     [SerializeField]

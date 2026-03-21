@@ -15,7 +15,9 @@ public class Player : Entity
     float switchTime;
     float currentTimer;
 
+    [SerializeField]
     ControlScheme movementControl = ControlScheme.WASD;
+    [SerializeField]
     ControlScheme attackControl = ControlScheme.JIKL;
     ControlScheme[] openControls = { ControlScheme.Arrows, ControlScheme.JIKL };
 
@@ -57,6 +59,7 @@ public class Player : Entity
             {
                 rangedColliders[i].enabled = false;
                 rangedSprites[i].enabled = false;
+                canAttack = true;
             }
         }
 
@@ -75,6 +78,7 @@ public class Player : Entity
             {
                 meleeColliders[i].enabled = false;
                 meleeSprites[i].enabled = false;
+                canAttack = true;
             }
         }
 
@@ -144,20 +148,23 @@ public class Player : Entity
     /// </summary>
     protected override void Attack()
     {
-        if (attackControl == ControlScheme.WASD)
+        if (canAttack)
         {
-            if (Input.GetKey(KeyCode.A)) RangedAttack();
-            else if (Input.GetKey(KeyCode.D)) MeleeAttack();
-        }
-        else if (attackControl == ControlScheme.JIKL)
-        {
-            if (Input.GetKey(KeyCode.J)) RangedAttack();
-            else if (Input.GetKey(KeyCode.L)) MeleeAttack();
-        }
-        else if (attackControl == ControlScheme.JIKL)
-        {
-            if (Input.GetKey(KeyCode.LeftArrow)) RangedAttack();
-            else if (Input.GetKey(KeyCode.RightArrow)) MeleeAttack();
+            if (attackControl == ControlScheme.WASD)
+            {
+                if (Input.GetKey(KeyCode.A)) RangedAttack();
+                else if (Input.GetKey(KeyCode.D)) MeleeAttack();
+            }
+            else if (attackControl == ControlScheme.JIKL)
+            {
+                if (Input.GetKey(KeyCode.J)) RangedAttack();
+                else if (Input.GetKey(KeyCode.L)) MeleeAttack();
+            }
+            else if (attackControl == ControlScheme.JIKL)
+            {
+                if (Input.GetKey(KeyCode.LeftArrow)) RangedAttack();
+                else if (Input.GetKey(KeyCode.RightArrow)) MeleeAttack();
+            }
         }
     }
 
@@ -169,6 +176,11 @@ public class Player : Entity
         // 1. able to attack
         if (rangedCooldown <= 0)
         {
+            // rotate based on direction 
+            float angle = Mathf.Atan2(velocity.y, velocity.x) * Mathf.Rad2Deg;
+            Transform partentTrasfomr = rangedColliders[0].transform.parent;
+            partentTrasfomr.rotation = Quaternion.Euler(0, 0, angle);
+
             // turn on all colliders and sprites 
             for (int i = 0; i < rangedColliders.Length; i++)
             {
@@ -177,7 +189,8 @@ public class Player : Entity
             }
 
             // reset cool down
-            rangedCooldown = rangedMaxCooldown; 
+            rangedCooldown = rangedMaxCooldown;
+            canAttack = false;
         }
     }
 
@@ -198,6 +211,7 @@ public class Player : Entity
 
             // reset cool down
             meleeCooldown = meleeMaxCooldown;
+            canAttack = false;
         }
         
     }
