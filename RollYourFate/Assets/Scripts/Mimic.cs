@@ -4,6 +4,7 @@ public class Mimic : Enemy
 {
     private bool battleMode = false;
 
+    [SerializeField]
     private GameObject itemDrop;
 
     /// <summary>
