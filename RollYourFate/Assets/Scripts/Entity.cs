@@ -15,7 +15,8 @@ public abstract class Entity : MonoBehaviour
     protected float longCoolDown;
 
     [SerializeField]
-    protected float health;
+    protected float maxHealth;
+    protected float currentHealth;
 
     [SerializeField]
     protected float speed;
@@ -24,10 +25,15 @@ public abstract class Entity : MonoBehaviour
 
 
     protected Rigidbody2D rb;
+    //protected SpriteRenderer sprite;
+    //protected Collider2D collider;
+
 
     private void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        currentHealth = maxHealth;
+        
     }
     /// <summary>
     /// Check cooldown and runs attack

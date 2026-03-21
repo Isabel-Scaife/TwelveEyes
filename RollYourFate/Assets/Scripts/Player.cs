@@ -15,8 +15,11 @@ public class Player : Entity
     float switchTime;
     float currentTimer;
 
+    [SerializeField]
     ControlScheme movementControl = ControlScheme.WASD;
+    [SerializeField]
     ControlScheme attackControl = ControlScheme.JIKL;
+    [SerializeField]
     ControlScheme[] openControls = { ControlScheme.Arrows, ControlScheme.JIKL };
 
     private void FixedUpdate()
@@ -63,11 +66,12 @@ public class Player : Entity
             openControls[rng] = movementControl;
             movementControl = tempScheme;
 
-            // same as above but can randomize to the same contorls 
+            // 4. new movement can be anything else 
             rng = Random.Range(0, 2);
-            tempScheme = openControls[rng];
-            openControls[rng] = attackControl;
-            attackControl = tempScheme;
+            attackControl = openControls[rng];
+
+            // 4. reset timer
+            currentTimer = 0;
         }
     }
 
@@ -83,27 +87,27 @@ public class Player : Entity
         {
             if(Input.GetKey(KeyCode.A)) velocity.x -= 1;
             if(Input.GetKey(KeyCode.D)) velocity.x += 1;
-            if(Input.GetKeyUp(KeyCode.S)) velocity.y -= 1;
-            if(Input.GetKeyUp(KeyCode.W)) velocity.y += 1;
+            if(Input.GetKey(KeyCode.S)) velocity.y -= 1;
+            if(Input.GetKey(KeyCode.W)) velocity.y += 1;
         }
         else if (movementControl == ControlScheme.JIKL)
         {
             if (Input.GetKey(KeyCode.J)) velocity.x -= 1;
             if (Input.GetKey(KeyCode.L)) velocity.x += 1;
-            if (Input.GetKeyUp(KeyCode.K)) velocity.y -= 1;
-            if (Input.GetKeyUp(KeyCode.I)) velocity.y += 1;
+            if (Input.GetKey(KeyCode.K)) velocity.y -= 1;
+            if (Input.GetKey(KeyCode.I)) velocity.y += 1;
         }
 
         else if (movementControl == ControlScheme.Arrows)
         {
             if (Input.GetKey(KeyCode.LeftArrow)) velocity.x -= 1;
             if (Input.GetKey(KeyCode.RightArrow)) velocity.x += 1;
-            if (Input.GetKeyUp(KeyCode.DownArrow)) velocity.y -= 1;
-            if (Input.GetKeyUp(KeyCode.UpArrow)) velocity.y += 1;
+            if (Input.GetKey(KeyCode.DownArrow)) velocity.y -= 1;
+            if (Input.GetKey(KeyCode.UpArrow)) velocity.y += 1;
         }
 
         velocity.Normalize();
-        position = velocity * speed * Time.deltaTime;
+        position += velocity * speed * Time.deltaTime;
         rb.transform.position = position;
     }
     /// <summary>
@@ -148,6 +152,9 @@ public class Player : Entity
             // turn on sprite render 
 
             // reset cool down
+            shortCoolDown = 0;
         }
     }
+
+    
 }
