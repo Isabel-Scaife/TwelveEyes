@@ -14,6 +14,8 @@ public class Enemy : Entity
     [SerializeField] public float maxSpeed;
     [SerializeField] public float maxForce;
 
+    [SerializeField] public GameManager gameManager;
+
     private Vector3 acceleration;
     private float decelerationRate = 0.8f;
     private float minSpeed = 0.01f;
@@ -231,5 +233,13 @@ public class Enemy : Entity
         Vector3 steeringForce = desiredVelocity - velocity;
 
         return steeringForce;
+    }
+
+    /// <summary>
+    /// When the enemy dies, calls the DestroyEnemy delegate
+    /// </summary>
+    public void OnDestroy()
+    {
+        gameManager.DestroyEnemy();
     }
 }
