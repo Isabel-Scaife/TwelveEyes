@@ -5,7 +5,7 @@ public class Mimic : Enemy
     private bool battleMode = false;
 
     [SerializeField]
-    private GameObject itemDrop;
+    private GameObject itemDropPrefab;
 
     [SerializeField]
     Sprite attackSprite;
@@ -57,7 +57,7 @@ public class Mimic : Enemy
 
     private void OnDestroy()
     {
-        // Drop item 
+        Instantiate(itemDropPrefab, transform.position, Quaternion.identity);
     }
 
     void OnTriggerEnter2D(Collider2D collision)

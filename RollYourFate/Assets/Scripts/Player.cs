@@ -13,6 +13,9 @@ enum ControlScheme
 public class Player : Entity
 {
 
+    bool meleeUpgrade = false;
+    bool rangeUpgrade = false;
+
     [SerializeField]
     float switchTime;
     float currentTimer;
@@ -211,15 +214,25 @@ public class Player : Entity
 
             partentTrasform.position = this.position;
 
-            // 3. turn on all colliders and sprites 
-            for (int i = 0; i < rangedColliders.Length; i++)
+            // 3. turn on colliders and sprites 
+            if(rangeUpgrade)
             {
-                rangedColliders[i].enabled = true;
-                rangedSprites[i].enabled = true;
+                for (int i = 1; i < rangedColliders.Length; i++)
+                {
+                    rangedColliders[i].enabled = true;
+                    rangedSprites[i].enabled = true;
+                }
+                rangedColliders[0].enabled = true;
+                rangedSprites[0].enabled = true;
+            }
+            else
+            {
+                rangedColliders[0].enabled = true;
+                rangedSprites[0].enabled = true;
             }
 
-            // 4. reset cool down
-            rangedCooldown = rangedMaxCooldown;
+                // 4. reset cool down
+                rangedCooldown = rangedMaxCooldown;
             canAttack = false;
         }
     }
@@ -238,14 +251,22 @@ public class Player : Entity
             RotateAttack(partentTrasform);
 
             // turn on all colliders and sprites 
-            for (int i = 0; i < meleeColliders.Length; i++)
+            if (meleeUpgrade)
             {
-                meleeColliders[i].enabled = true;
-                meleeSprites[i].enabled = true;
+                for (int i = 1; i < meleeColliders.Length; i++)
+                {
+                    meleeColliders[i].enabled = true;
+                    meleeSprites[i].enabled = true;
+                }
+            }
+            else
+            {
+                meleeColliders[0].enabled = true;
+                meleeSprites[0].enabled = true;
             }
 
-            // reset cool down
-            meleeCooldown = meleeMaxCooldown;
+                // reset cool down
+                meleeCooldown = meleeMaxCooldown;
             canAttack = false;
         }
 
