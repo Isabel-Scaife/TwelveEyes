@@ -12901,6 +12901,126 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &1156479389
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1156479392}
+  - component: {fileID: 1156479391}
+  - component: {fileID: 1156479390}
+  m_Layer: 0
+  m_Name: Slime_0
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1156479390
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1156479389}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e3c099740964e1f4c9647c4a7cd8188f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  meleeMaxCooldown: 0
+  meleeCooldown: 0
+  meleeActiveTimer: 0
+  meleeSprites:
+  - {fileID: 0}
+  meleeColliders:
+  - {fileID: 0}
+  rangedMaxCooldown: 0
+  rangedActiveTimer: 0
+  rangedSprites: []
+  rangedColliders: []
+  maxHealth: 60
+  speed: 1.5
+  maxSpeed: 2.5
+  maxForce: 0
+  player: {fileID: 1762684521}
+  walls: []
+  playerRadius: 10
+  meleeRadius: 5
+  rangeRadius: 3
+--- !u!212 &1156479391
+SpriteRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1156479389}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_Sprite: {fileID: -7282886668606283007, guid: deb7c2bbe3c1fb44fb0d53cd7c9e3274, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_FlipX: 0
+  m_FlipY: 0
+  m_DrawMode: 0
+  m_Size: {x: 9.69, y: 8.48}
+  m_AdaptiveModeThreshold: 0.5
+  m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
+  m_MaskInteraction: 0
+  m_SpriteSortPoint: 0
+--- !u!4 &1156479392
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1156479389}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -37.4423, y: -27.4621, z: 0}
+  m_LocalScale: {x: 0.8674, y: 0.8674, z: 0.8674}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1174165836
 GameObject:
   m_ObjectHideFlags: 0
@@ -13518,8 +13638,8 @@ PolygonCollider2D:
       - {x: 3.9866784, y: 4.1976595}
       - {x: 5.7380285, y: 3.654279}
       - {x: 6.505203, y: 2.4175203}
-      - {x: 6.3235464, y: 0.54649466}
-      - {x: 7.277654, y: -0.5929778}
+      - {x: 6.803877, y: 0.5649672}
+      - {x: 7.6471376, y: -1.0178828}
       - {x: 6.9045615, y: -2.0047889}
       - {x: 5.614549, y: -3.2564332}
       - {x: 3.8221138, y: -3.4735053}
@@ -13596,9 +13716,9 @@ MonoBehaviour:
   - {fileID: 632111204}
   - {fileID: 582251340}
   - {fileID: 1152792553}
-  maxHealth: 20
+  maxHealth: 40
   speed: 2.5
-  maxSpeed: 1.5
+  maxSpeed: 3.5
   maxForce: 5
   player: {fileID: 1762684521}
   walls:
@@ -13962,16 +14082,16 @@ MonoBehaviour:
   - {fileID: 261410632}
   - {fileID: 1528394451}
   - {fileID: 1529529850}
-  maxHealth: 50
+  maxHealth: 30
   speed: 0
   maxSpeed: 0
   maxForce: 0
   player: {fileID: 1762684521}
   walls: []
-  playerRadius: 0
-  meleeRadius: 0
-  rangeRadius: 0
-  itemDropPrefab: {fileID: 0}
+  playerRadius: 10
+  meleeRadius: 5
+  rangeRadius: 8
+  itemDropPrefab: {fileID: 1475690919204690097, guid: 2bc6d78ca749533408e4ea9445e8c32d, type: 3}
   attackSprite: {fileID: 8861821910098753426, guid: 28cdb77fe167e3e4d9de59e28ca4f7d0, type: 3}
   attackCollider: {fileID: 1337058565}
   triggerCollider: {fileID: 1337058566}
@@ -15135,14 +15255,13 @@ MonoBehaviour:
   - {fileID: 1265004800}
   - {fileID: 485096024}
   - {fileID: 202150450}
-  - {fileID: 1765448320}
   rangedColliders:
   - {fileID: 903765943}
   - {fileID: 1571500999}
   - {fileID: 1265004799}
   - {fileID: 485096023}
   - {fileID: 202150448}
-  maxHealth: 50
+  maxHealth: 30
   speed: 0
   maxSpeed: 0
   maxForce: 0
@@ -15152,10 +15271,10 @@ MonoBehaviour:
   - {fileID: 2016125376}
   - {fileID: 170927729}
   - {fileID: 1373588581}
-  playerRadius: 0
-  meleeRadius: 0
-  rangeRadius: 0
-  itemDropPrefab: {fileID: 0}
+  playerRadius: 10
+  meleeRadius: 5
+  rangeRadius: 8
+  itemDropPrefab: {fileID: 1475690919204690097, guid: 2bc6d78ca749533408e4ea9445e8c32d, type: 3}
   attackSprite: {fileID: 8861821910098753426, guid: 28cdb77fe167e3e4d9de59e28ca4f7d0, type: 3}
   attackCollider: {fileID: 1601666874}
   triggerCollider: {fileID: 1601666875}
@@ -40138,3 +40257,4 @@ SceneRoots:
   - {fileID: 854612375}
   - {fileID: 652949862}
   - {fileID: 1820133230}
+  - {fileID: 1156479392}
