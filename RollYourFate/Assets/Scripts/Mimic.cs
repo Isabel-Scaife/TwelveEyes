@@ -10,6 +10,12 @@ public class Mimic : Enemy
     [SerializeField]
     Sprite attackSprite;
 
+    [SerializeField]
+    Collider2D attackCollider;
+
+    [SerializeField]
+    Collider2D triggerCollider;
+
     /// <summary>
     /// Can not attack until interaced with
     /// </summary>
@@ -58,7 +64,8 @@ public class Mimic : Enemy
     {
         battleMode = true;
 
-
         this.gameObject.GetComponent<SpriteRenderer>().sprite = attackSprite;
+        attackCollider.enabled = true;
+        triggerCollider.enabled = false;
     }
 }
