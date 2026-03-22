@@ -20,6 +20,9 @@ public class Player : Entity
     [SerializeField]
     Slider healthBar;
     [SerializeField]
+    Slider switchBar;
+
+    [SerializeField]
     TMP_Text switchText;
     [SerializeField]
     Slider cooldownRanged;
@@ -36,6 +39,12 @@ public class Player : Entity
     {
         cooldownRanged.gameObject.SetActive(false);
         cooldownMelee.gameObject.SetActive(false);
+
+        // set bar length
+        healthBar.maxValue = maxHealth;
+        cooldownMelee.maxValue = meleeMaxCooldown;
+        cooldownRanged.maxValue = rangedMaxCooldown;
+        switchBar.maxValue = switchTime;
 
         base.Start();
     }
@@ -54,19 +63,8 @@ public class Player : Entity
         // 4. attack 
         Attack();
 
-        healthBar.maxValue = maxHealth;
-        cooldownMelee.maxValue = meleeMaxCooldown;
-        cooldownRanged.maxValue = rangedMaxCooldown;
-        cooldownMelee.value = meleeCooldown;
-        cooldownRanged.value = rangedCooldown;
-        if (rangedCooldown <= 0)
-        {
-            cooldownRanged.gameObject.SetActive(false);
-        }
-        if(meleeCooldown <= 0)
-        {
-            cooldownMelee.gameObject.SetActive(false);
-        }
+        // 5. Update UI
+        UpdateUI();
 
     }
 
@@ -76,7 +74,8 @@ public class Player : Entity
     protected override void Timer()
     {
         currentTimer += Time.deltaTime;
-        switchText.text = $"Controls switch in: {(switchTime - currentTimer).ToString("f2")} \nCurrent movement: {movementControl.ToString()} \nCurrent attacks: {attackControl.ToString()}";
+        switchText.text = $"Move: {movementControl.ToString()}\t\t\t\t" +
+                          $"Attack: {attackControl.ToString()}";
 
         base.Timer();
     }
@@ -250,6 +249,23 @@ public class Player : Entity
             canAttack = false;
         }
 
+    }
+
+    void UpdateUI()
+    {
+        // update cooldown bars
+        cooldownMelee.value = meleeCooldown;
+        cooldownRanged.value = rangedCooldown;
+        switchBar.value = switchTime - currentTimer;
+
+        if (rangedCooldown <= 0)
+        {
+            cooldownRanged.gameObject.SetActive(false);
+        }
+        if (meleeCooldown <= 0)
+        {
+            cooldownMelee.gameObject.SetActive(false);
+        }
     }
 
 }
