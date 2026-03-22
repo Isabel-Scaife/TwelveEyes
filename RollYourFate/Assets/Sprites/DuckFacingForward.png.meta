@@ -1,13 +1,16 @@
 fileFormatVersion: 2
-guid: 7650878907e8f0b499ce647c72adcf52
+guid: 805190c931ea6a348b5b1f0c019b2d72
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 1372335161102834277
-    second: Dragon_0
+      213: -5639713372738476827
+    second: DuckFacingForward_0
   - first:
-      213: 7236858470366593164
-    second: Dragon_1
+      213: -7585147995281337082
+    second: DuckFacingForward_1
+  - first:
+      213: -5466610289664547184
+    second: DuckFacingForward_2
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -54,7 +57,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 650
+  spritePixelsToUnits: 100
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -99,43 +102,17 @@ TextureImporter:
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 4
-    buildTarget: Android
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
-  - serializedVersion: 4
-    buildTarget: WebGL
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-    ignorePlatformSupport: 0
-    androidETC2FallbackOverride: 0
-    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Dragon_0
+      name: DuckFacingForward_0
       rect:
         serializedVersion: 2
-        x: 47
-        y: 12
-        width: 1407
-        height: 1048
+        x: 173
+        y: 304
+        width: 1459
+        height: 828
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -144,20 +121,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 56a105ede838b0310800000000000000
-      internalID: 1372335161102834277
+      spriteID: 5e427e66196bbb1b0800000000000000
+      internalID: -5639713372738476827
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Dragon_1
+      name: DuckFacingForward_1
       rect:
         serializedVersion: 2
-        x: 905
-        y: 1057
-        width: 21
-        height: 7
+        x: 0
+        y: 120
+        width: 78
+        height: 57
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -166,8 +143,30 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: c804affaf6c7e6460800000000000000
-      internalID: 7236858470366593164
+      spriteID: 6055d7c06142cb690800000000000000
+      internalID: -7585147995281337082
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: DuckFacingForward_2
+      rect:
+        serializedVersion: 2
+        x: 1972
+        y: 0
+        width: 28
+        height: 78
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 096ac07a7e2b224b0800000000000000
+      internalID: -5466610289664547184
       vertices: []
       indices: 
       edges: []
@@ -186,8 +185,9 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Dragon_0: 1372335161102834277
-      Dragon_1: 7236858470366593164
+      DuckFacingForward_0: -5639713372738476827
+      DuckFacingForward_1: -7585147995281337082
+      DuckFacingForward_2: -5466610289664547184
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
