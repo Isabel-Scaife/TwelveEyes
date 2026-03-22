@@ -55,7 +55,7 @@ public class Mimic : Enemy
         battleMode = true;
     }
 
-    private void OnDestroy()
+    public void OnDestroy()
     {
         Instantiate(itemDropPrefab, transform.position, Quaternion.identity);
     }
