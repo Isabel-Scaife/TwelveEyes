@@ -25,7 +25,7 @@ public class Enemy : Entity
     [SerializeField] public List<GameObject> walls;
 
     // radius around enemy that it detects walls
-    [SerializeField] public float radius;
+    private float radius;
 
     // Radius (range) of when to seek + attack player
     [SerializeField] public float playerRadius;
@@ -42,10 +42,7 @@ public class Enemy : Entity
     protected override void Start()
     {
         // sets default radii if none set in inspector
-        if (radius <= 0)
-        {
-            radius = 2;
-        }
+        radius = 4;
 
         if (playerRadius <= 0)
         {
@@ -63,10 +60,9 @@ public class Enemy : Entity
         Timer();
 
         Move();
-
         Attack();
-        
-    
+
+
     }
 
     /// <summary>
@@ -82,13 +78,15 @@ public class Enemy : Entity
         // Enemies only seek player and flee walls when in range of the player
         if (InRange(this, player.gameObject, playerRadius))
         {
-            ultimateForce += Seek(player) * 0.6f;
+            ultimateForce += Seek(player) * 0.8f;
 
             // Enemies only flee walls that are in range
-            List<GameObject> wallsInRange = DetectWalls(walls, radius);
-            for (int i = 0; i < wallsInRange.Count; i++)
+            for (int i = 0; i < walls.Count; i++)
             {
-                ultimateForce += Flee(wallsInRange[i]) * 0.7f;
+                if (InRange(this, walls[i], radius))
+                {
+                    ultimateForce += Flee(walls[i]);
+                }
             }
         }
         // deceleration
@@ -124,7 +122,7 @@ public class Enemy : Entity
         {
             Destroy(this.gameObject);
         }
-    }    
+    }
 
     /// <summary>
     /// Enemies attack when in range of the player, and choose
@@ -233,23 +231,5 @@ public class Enemy : Entity
         Vector3 steeringForce = desiredVelocity - velocity;
 
         return steeringForce;
-    }
-
-    /// <summary>
-    /// Determines which walls are in radius of the enemy
-    /// </summary>
-    /// <param name="walls"></param>
-    /// <param name="radius"></param>
-    protected List<GameObject> DetectWalls(List<GameObject> walls, float radius)
-    {
-        List<GameObject> wallsInRange = new List<GameObject>();
-        for (int i = 0; i < walls.Count; i++)
-        {
-            if (InRange(this, walls[i], radius))
-            {
-                wallsInRange.Add(walls[i]);
-            }
-        }
-        return wallsInRange;
     }
 }
