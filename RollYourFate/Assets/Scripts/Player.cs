@@ -300,4 +300,35 @@ public class Player : Entity
         }
     }
 
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if (Input.GetKey(KeyCode.Space))
+        {
+            // health item
+            if(collision.CompareTag("Heal"))
+            {
+                currentHealth += 30;
+                healthBar.value = currentHealth;
+
+                Destroy(collision.gameObject);
+            }
+            else if (collision.CompareTag("Melee"))
+            {
+                meleeUpgrade = true;
+                meleeColliders[0].enabled = false;
+                meleeSprites[0].enabled = false;
+
+                Destroy(collision.gameObject);
+            }
+            else if (collision.CompareTag("Ranged"))
+            {
+                rangeUpgrade = true;
+                rangedColliders[0].enabled = false;
+                rangedSprites[0].enabled = false;
+
+                Destroy(collision.gameObject);
+            }
+        }
+    }
+
 }
