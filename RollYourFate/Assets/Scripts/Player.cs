@@ -275,7 +275,7 @@ public class Player : Entity
             }
 
                 // reset cool down
-                meleeCooldown = meleeMaxCooldown;
+            meleeCooldown = meleeMaxCooldown;
             canAttack = false;
         }
 
