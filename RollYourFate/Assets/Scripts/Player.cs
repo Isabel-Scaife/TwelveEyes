@@ -165,7 +165,10 @@ public class Player : Entity
 
         if (currentHealth < 0)
         {
+            ChangeScene changeScene = new ChangeScene();
+            changeScene.Change(3);
             // lose game
+            
         }
 
     }
