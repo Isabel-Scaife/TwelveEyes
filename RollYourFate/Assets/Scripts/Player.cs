@@ -31,6 +31,10 @@ public class Player : Entity
     Slider cooldownRanged;
     [SerializeField]
     Slider cooldownMelee;
+    [SerializeField]
+    TMP_Text cooldownRText;
+    [SerializeField]
+    TMP_Text cooldownMText;
 
     [SerializeField]
     ControlScheme movementControl = ControlScheme.WASD;
@@ -42,6 +46,8 @@ public class Player : Entity
     {
         cooldownRanged.gameObject.SetActive(false);
         cooldownMelee.gameObject.SetActive(false);
+        cooldownRText.gameObject.SetActive(false);
+        cooldownMText.gameObject.SetActive(false);
 
         // set bar length
         healthBar.maxValue = maxHealth;
@@ -176,21 +182,21 @@ public class Player : Entity
             
             if (attackControl == ControlScheme.WASD)
             {
-                if (Input.GetKey(KeyCode.A)) { RangedAttack(); cooldownRanged.gameObject.SetActive(true); }
-                else if (Input.GetKey(KeyCode.D)) { MeleeAttack(); cooldownMelee.gameObject.SetActive(true); }
+                if (Input.GetKey(KeyCode.A)) { RangedAttack(); cooldownRanged.gameObject.SetActive(true); cooldownRText.gameObject.SetActive(true); }
+                else if (Input.GetKey(KeyCode.D)) { MeleeAttack(); cooldownMelee.gameObject.SetActive(true); cooldownMText.gameObject.SetActive(true); }
 
 
             }
             else if (attackControl == ControlScheme.JIKL)
             {
-                if (Input.GetKey(KeyCode.J)) { RangedAttack(); cooldownRanged.gameObject.SetActive(true); }
-                else if (Input.GetKey(KeyCode.L)) { MeleeAttack(); cooldownMelee.gameObject.SetActive(true); }
+                if (Input.GetKey(KeyCode.J)) { RangedAttack(); cooldownRanged.gameObject.SetActive(true); cooldownRText.gameObject.SetActive(true); }
+                else if (Input.GetKey(KeyCode.L)) { MeleeAttack(); cooldownMelee.gameObject.SetActive(true); cooldownMText.gameObject.SetActive(true); }
 
             }
             else if (attackControl == ControlScheme.Arrows)
             {
-                if (Input.GetKey(KeyCode.LeftArrow)) { RangedAttack(); cooldownRanged.gameObject.SetActive(true); }
-                else if (Input.GetKey(KeyCode.RightArrow)) { MeleeAttack(); cooldownMelee.gameObject.SetActive(true); }
+                if (Input.GetKey(KeyCode.LeftArrow)) { RangedAttack(); cooldownRanged.gameObject.SetActive(true); cooldownRText.gameObject.SetActive(true); }
+                else if (Input.GetKey(KeyCode.RightArrow)) { MeleeAttack(); cooldownMelee.gameObject.SetActive(true); cooldownMText.gameObject.SetActive(true); }
 
             }
             
@@ -282,10 +288,12 @@ public class Player : Entity
         if (rangedCooldown <= 0)
         {
             cooldownRanged.gameObject.SetActive(false);
+            cooldownRText.gameObject.SetActive(false);
         }
         if (meleeCooldown <= 0)
         {
             cooldownMelee.gameObject.SetActive(false);
+            cooldownMText.gameObject.SetActive(false);
         }
     }
 
