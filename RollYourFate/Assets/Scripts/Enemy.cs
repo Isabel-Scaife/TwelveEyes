@@ -122,6 +122,8 @@ public class Enemy : Entity
 
         if (currentHealth <= 0)
         {
+            gameManager.numEnemies--;
+            gameManager.WinCondition();
             Destroy(this.gameObject);
         }
     }
@@ -233,13 +235,5 @@ public class Enemy : Entity
         Vector3 steeringForce = desiredVelocity - velocity;
 
         return steeringForce;
-    }
-
-    /// <summary>
-    /// When the enemy dies, calls the DestroyEnemy delegate
-    /// </summary>
-    public void OnDestroy()
-    {
-        gameManager.DestroyEnemy();
     }
 }

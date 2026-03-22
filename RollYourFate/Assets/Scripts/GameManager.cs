@@ -2,43 +2,28 @@ using NUnit.Framework;
 using UnityEngine;
 using System.Collections.Generic;
 using UnityEngine.Events;
+using UnityEditor.SearchService;
 
 public class GameManager : MonoBehaviour
 {
-    public delegate void EnemyDestroyed();
-    EnemyDestroyed destroyEnemy;
-    private int enemiesKilled;
-    private Enemy[] enemies;
+    [SerializeField]
+    public int numEnemies;
 
     [SerializeField] public ChangeScene changeScene;
 
     void Start()
     {
-        enemiesKilled = 0;
-
-        if (destroyEnemy == null)
-        {
-            destroyEnemy = DestroyEnemy;
-        }
-
-        enemies = Object.FindObjectsByType<Enemy>(FindObjectsSortMode.None);
-        for (int i = 0; i < enemies.Length; i++)
-        {
-            Debug.Log(enemies[i]);
-        }
     }
 
     // Update is called once per frame
-    void Update() {}
+    void Update(){}
 
     /// <summary>
-    /// Defines what happens when an enemy dies
+    /// Win when all enemies die
     /// </summary>
-    public void DestroyEnemy()
+    public void WinCondition()
     {
-        Debug.Log("Enemy died!");
-        enemiesKilled++;
-        if (enemiesKilled >= enemies.Length)
+        if (numEnemies <= 0)
         {
             changeScene.Change(0);
         }

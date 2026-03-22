@@ -700,6 +700,7 @@ MonoBehaviour:
   speed: 0
   maxSpeed: 0
   maxForce: 0
+  gameManager: {fileID: 1222506581}
   player: {fileID: 1762684521}
   walls:
   - {fileID: 204419548}
@@ -15280,6 +15281,7 @@ MonoBehaviour:
   speed: 1.5
   maxSpeed: 2.5
   maxForce: 0
+  gameManager: {fileID: 1222506581}
   player: {fileID: 1762684521}
   walls: []
   playerRadius: 10
@@ -15725,6 +15727,52 @@ Transform:
   m_Children: []
   m_Father: {fileID: 854612375}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1222506580
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1222506582}
+  - component: {fileID: 1222506581}
+  m_Layer: 0
+  m_Name: GameManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1222506581
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1222506580}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a6d2979d990d0243bfa88b00f31fcba, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  numEnemies: 3
+  changeScene: {fileID: 1678198171}
+--- !u!4 &1222506582
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1222506580}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 21.336113, y: -30.078074, z: -0.090116724}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1225078273
 GameObject:
   m_ObjectHideFlags: 0
@@ -16098,6 +16146,7 @@ MonoBehaviour:
   speed: 2.5
   maxSpeed: 3.5
   maxForce: 5
+  gameManager: {fileID: 1222506581}
   player: {fileID: 1762684521}
   walls:
   - {fileID: 407798927}
@@ -17177,6 +17226,7 @@ MonoBehaviour:
   speed: 0
   maxSpeed: 0
   maxForce: 0
+  gameManager: {fileID: 1222506581}
   player: {fileID: 1762684521}
   walls:
   - {fileID: 1218935738}
@@ -17419,6 +17469,50 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 36009443}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1678198170
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1678198172}
+  - component: {fileID: 1678198171}
+  m_Layer: 0
+  m_Name: ChangeScene
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1678198171
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1678198170}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7903ca1b1e6d82640b3a76607fb60dd1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &1678198172
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1678198170}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 21.336113, y: -30.078074, z: -0.090116724}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1722726319
@@ -41820,6 +41914,7 @@ MonoBehaviour:
   speed: 0.5
   maxSpeed: 1.5
   maxForce: 5
+  gameManager: {fileID: 1222506581}
   player: {fileID: 1762684521}
   walls:
   - {fileID: 1300959036}
@@ -42293,6 +42388,7 @@ MonoBehaviour:
   speed: 0
   maxSpeed: 0
   maxForce: 0
+  gameManager: {fileID: 1222506581}
   player: {fileID: 1762684521}
   walls:
   - {fileID: 204419548}
@@ -43348,3 +43444,5 @@ SceneRoots:
   - {fileID: 1156479392}
   - {fileID: 1817236381}
   - {fileID: 1516476366}
+  - {fileID: 1222506582}
+  - {fileID: 1678198172}
