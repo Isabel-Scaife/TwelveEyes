@@ -7,6 +7,9 @@ public class Mimic : Enemy
     [SerializeField]
     private GameObject itemDrop;
 
+    [SerializeField]
+    Sprite attackSprite;
+
     /// <summary>
     /// Can not attack until interaced with
     /// </summary>
@@ -49,5 +52,13 @@ public class Mimic : Enemy
     private void OnDestroy()
     {
         // Drop item 
+    }
+
+    void OnTriggerEnter2D(Collider2D collision)
+    {
+        battleMode = true;
+
+
+        this.gameObject.GetComponent<SpriteRenderer>().sprite = attackSprite;
     }
 }
