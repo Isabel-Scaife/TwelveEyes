@@ -112,7 +112,7 @@ public abstract class Entity : MonoBehaviour
         }
 
         // deactive weapon
-        if ((rangedColliders[0].enabled || rangedColliders[1].enabled) &&
+        if ((rangedColliders[0].enabled) &&
                  rangedCooldown <= rangedMaxCooldown - rangedActiveTimer)
         {
             // turn off all colliders and sprites 
@@ -135,7 +135,7 @@ public abstract class Entity : MonoBehaviour
         }
 
         // deactive weapon
-        if ((meleeColliders[0].enabled || meleeColliders[1].enabled) &&
+        if ((meleeColliders[0].enabled) &&
                  meleeCooldown <= meleeMaxCooldown - meleeActiveTimer)
         {
             // turn off all colliders and sprites 

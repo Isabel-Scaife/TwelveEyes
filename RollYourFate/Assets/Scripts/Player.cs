@@ -86,7 +86,47 @@ public class Player : Entity
         switchText.text = $"Move: {movementControl.ToString()}\t\t\t\t" +
                           $"Attack: {attackControl.ToString()}";
 
-        base.Timer();
+        // ================ ranged timers ======================
+        if (rangedCooldown > 0)
+        {
+            rangedCooldown -= Time.deltaTime;
+        }
+
+        // deactive weapon
+        if ((rangedColliders[0].enabled || rangedColliders[1].enabled) &&
+                 rangedCooldown <= rangedMaxCooldown - rangedActiveTimer)
+        {
+            // turn off all colliders and sprites 
+            for (int i = 0; i < rangedColliders.Length; i++)
+            {
+                rangedColliders[i].enabled = false;
+                rangedSprites[i].enabled = false;
+                canAttack = true;
+            }
+        }
+
+        // ================== melee timers ====================== 
+        if (meleeCooldown > 0)
+        {
+            meleeCooldown -= Time.deltaTime;
+
+            // attadck faces forward
+            Transform partentTrasform = meleeColliders[0].transform.parent;
+            RotateAttack(partentTrasform);
+        }
+
+        // deactive weapon
+        if ((meleeColliders[0].enabled || meleeColliders[1].enabled) &&
+                 meleeCooldown <= meleeMaxCooldown - meleeActiveTimer)
+        {
+            // turn off all colliders and sprites 
+            for (int i = 0; i < meleeColliders.Length; i++)
+            {
+                meleeColliders[i].enabled = false;
+                meleeSprites[i].enabled = false;
+                canAttack = true;
+            }
+        }
     }
 
     
